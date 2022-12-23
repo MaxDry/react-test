@@ -1,7 +1,14 @@
 .wrapper {
     margin: 0 150px;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 70px;
     grid-auto-rows: minmax(100px, auto);
+}
+
+.select-category {
+    border-radius: 4px;
+    padding: 5px 20px;
+    font-size: 17px;
+    margin-bottom: 30px;
 }

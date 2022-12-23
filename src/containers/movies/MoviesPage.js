@@ -1,10 +1,11 @@
 import './MoviesPage.scss';
 import Card from '../../components/card/Card';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { moviesList } from '../../datas/movies';
 
 const MoviesPage = () => {
     const [movies, setMovies] = useState();
+    const [category, setCategory] = useState();
 
     const fetchMovies = async () => {
         let movies = await moviesList;
@@ -17,6 +18,11 @@ const MoviesPage = () => {
             newMovies.splice(movieIndex,1)
             return newMovies;
         })
+    }
+
+    const getCategories = () => {
+        const categories = [... new Set(movies.map(movie => movie.category))];
+        return categories;
     }
 
     const likeDislikeMovie = (movie, type) => {
@@ -58,17 +64,33 @@ const MoviesPage = () => {
     }
 
     useEffect(() => {
-        fetchMovies();
-    }, [])
+        if(category === undefined || category === ""){
+            fetchMovies();
+        }
+    }, [category])
+
+    function changeCategory(event) {
+        setCategory(event.target.value);
+    }
 
     return (
         <div>
+            <select className="select-category" onChange={changeCategory}>
+                <option value="">Aucun</option>
+                {movies && getCategories().map((category) => {
+                    return (
+                        <option key={category} value={category}>{category}</option>
+                    )
+                })}
+            </select>
             <div className="wrapper">
                 {
                     movies && movies.map((movie, index) => {
-                        return (
-                            <Card likeDislikeMovie={likeDislikeMovie} deleteMovie={deleteMovie} movie={movie} index={index} key={index} />
-                        )
+                        if(movie.category === category || category === "" || category === undefined) {
+                            return (
+                                <Card likeDislikeMovie={likeDislikeMovie} deleteMovie={deleteMovie} movie={movie} index={index} key={index} />
+                            )
+                        }
                     })
                 }
             </div>
