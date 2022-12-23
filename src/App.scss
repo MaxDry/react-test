@@ -1,5 +1,31 @@
+html {
+  background-color: #f6f6f2;
+}
+
 .App {
   text-align: center;
+}
+
+.header {
+  margin-bottom: 100px;
+
+  h1 {
+    color: #388087;
+    //#c2edce
+    //#6fb3b8
+    //#badfe7
+    font-size: 4em;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-bottom: 0;
+  }
+  
+  h2 {
+    color: #388087;
+    font-weight: 300;
+    margin-top: 0;
+  }
 }
 
 .App-logo {
