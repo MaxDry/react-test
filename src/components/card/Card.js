@@ -1,7 +1,6 @@
 import './Card.scss';
 import Button from '../button/Button';
 import { rateLikes } from '../../utils/utils';
-import { memo } from "react";
 
 const Card = ({deleteMovie, movie, likeDislikeMovie}) => {
 
@@ -36,4 +35,4 @@ const Card = ({deleteMovie, movie, likeDislikeMovie}) => {
     )
 }
 
-export default memo(Card);
+export default Card;
