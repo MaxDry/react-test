@@ -1,40 +1,73 @@
 import './MoviesPage.scss';
-import Button from '../../components/button/Button';
+import Card from '../../components/card/Card';
+import { useEffect, useState } from 'react';
+import { moviesList } from '../../datas/movies';
 
 const MoviesPage = () => {
+    const [movies, setMovies] = useState();
+
+    const fetchMovies = async () => {
+        let movies = await moviesList;
+        setMovies(movies);
+    }
+
+    const deleteMovie = (movieIndex) => {
+        setMovies((previousMovies) => {
+            let newMovies = [...previousMovies];
+            newMovies.splice(movieIndex,1)
+            return newMovies;
+        })
+    }
+
+    const likeDislikeMovie = (movie, type) => {
+        const newMovies = movies.map(obj => {
+            if (obj.id === movie.id) {
+                if (type === "like") {
+                    if(movie.myLike === true){
+                        return {
+                            ...obj,
+                            likes: obj.likes-1,
+                            myLike:undefined
+                        };
+                    }
+                     return {
+                        ...obj,
+                        likes: obj.likes+1,
+                        dislikes: movie.myLike === false ? obj.dislikes-1 : obj.dislikes,
+                        myLike:true
+                    };
+                }else if (type === 'dislike') {
+                    if(movie.myLike === false){
+                        return {
+                            ...obj,
+                            dislikes: obj.dislikes-1,
+                            myLike:undefined
+                        };
+                    }
+                    return {
+                        ...obj,
+                        dislikes: obj.dislikes+1,
+                        likes: movie.myLike === true ? obj.likes-1 : obj.likes,
+                        myLike:false
+                    };
+                }
+            }
+            return obj;
+          });
+          setMovies(newMovies);
+    }
+
+    useEffect(() => {
+        fetchMovies();
+    }, [])
+
     return (
         <div>
             <div className="wrapper">
                 {
-                    [1,2,3,4,5,6].map(() => {
+                    movies && movies.map((movie, index) => {
                         return (
-                            <div className="movie">
-                                <div className="card">
-                                    <div className="image">
-                                        <img src="./assets/img/avatar.jpeg" alt="No photo" />
-                                    </div>
-                                    <div className="description">
-                                        <span className="title">Avatar</span>
-                                        <span className="category">Science-fiction</span>
-                                    </div>
-                                    <div className="like-progress">
-                                        <div className="like-dislike">
-                                            <div className="likes">
-                                                <img src="./assets/img/like.svg" />
-                                                <span>20</span>
-                                            </div>
-                                            <div className="dislikes">
-                                            <img src="./assets/img/like.svg" />
-                                                <span>20</span>
-                                            </div>
-                                        </div>
-                                        <progress id="file" max="100" value="70" />
-                                    </div>
-                                    <div className="delete-movie">
-                                        <Button type="delete" onClick={() => console.log("Suppression")}>Supprimer</Button>
-                                    </div>
-                                </div>
-                            </div>
+                            <Card likeDislikeMovie={likeDislikeMovie} deleteMovie={deleteMovie} movie={movie} index={index} key={index} />
                         )
                     })
                 }
