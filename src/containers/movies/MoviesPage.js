@@ -35,7 +35,6 @@ const MoviesPage = () => {
             let newMovies = [...previousMovies];
             let indexMovie = newMovies.findIndex((movie) => movie.id === movieId);
             newMovies.splice(indexMovie,1)
-            
             return newMovies;
         })
     }
