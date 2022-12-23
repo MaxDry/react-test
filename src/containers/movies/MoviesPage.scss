@@ -1,5 +1,5 @@
 .wrapper {
-    margin: 0 150px;
+    margin: 0 140px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 70px;
@@ -11,4 +11,23 @@
     padding: 5px 20px;
     font-size: 17px;
     margin-bottom: 30px;
+}
+
+@media (max-width: 1600px) {
+    .wrapper {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 1300px) {
+    .wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 870px) {
+    .wrapper {
+        margin: 0 13%;
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
