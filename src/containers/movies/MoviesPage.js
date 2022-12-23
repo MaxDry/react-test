@@ -2,20 +2,40 @@ import './MoviesPage.scss';
 import Card from '../../components/card/Card';
 import { useEffect, useState, useMemo } from 'react';
 import { moviesList } from '../../datas/movies';
+import Pagination from '../../components/pagination/Pagination';
 
 const MoviesPage = () => {
     const [movies, setMovies] = useState();
     const [category, setCategory] = useState();
+    const [currentPage, setCurrentPage] = useState(1);
+    const [numberOfElement, setNumberOfElement] = useState(4);
+    const [limitPage, setLimitPage] =useState();
 
     const fetchMovies = async () => {
         let movies = await moviesList;
+        setLimitPage(Math.ceil(movies?.length/numberOfElement));
         setMovies(movies);
     }
 
-    const deleteMovie = (movieIndex) => {
+    const usingMovies = () => {
+        if(movies !== undefined){
+            if(category === undefined || category === ""){
+                return movies;
+            }else {
+                let usingMovies = movies.filter((movie) => movie.category === category);
+                return usingMovies;
+            }
+        }
+    }
+
+    const deleteMovie = (movieId) => {
+
+        setLimitPage(Math.ceil(usingMovies()?.length/numberOfElement));
         setMovies((previousMovies) => {
             let newMovies = [...previousMovies];
-            newMovies.splice(movieIndex,1)
+            let indexMovie = newMovies.findIndex((movie) => movie.id === movieId);
+            newMovies.splice(indexMovie,1)
+            
             return newMovies;
         })
     }
@@ -64,14 +84,22 @@ const MoviesPage = () => {
     }
 
     useEffect(() => {
-        if(category === undefined || category === ""){
-            fetchMovies();
-        }
-    }, [category])
+        fetchMovies();
+    }, [])
 
-    function changeCategory(event) {
+    const changeCategory = (event) => {
+        setCurrentPage(1);
         setCategory(event.target.value);
     }
+
+    const changeNumberOfElements = (event) => {
+        setNumberOfElement(event.target.value);
+        setLimitPage(Math.ceil(usingMovies()?.length/event.target.value));
+    }
+
+    useEffect(() => {
+        setLimitPage(Math.ceil(usingMovies()?.length/numberOfElement));
+    }, [category])
 
     return (
         <div>
@@ -83,17 +111,29 @@ const MoviesPage = () => {
                     )
                 })}
             </select>
+            <select className="select-category" onChange={changeNumberOfElements}>
+                {movies && [4,8,12].map((number) => {
+                    return (
+                        <option key={number} value={number}>{number}</option>
+                    )
+                })}
+            </select>
             <div className="wrapper">
                 {
-                    movies && movies.map((movie, index) => {
-                        if(movie.category === category || category === "" || category === undefined) {
+                    usingMovies() && usingMovies().slice((currentPage-1)*numberOfElement,currentPage*numberOfElement).map((movie, index) => {
                             return (
-                                <Card likeDislikeMovie={likeDislikeMovie} deleteMovie={deleteMovie} movie={movie} index={index} key={index} />
+                                <Card likeDislikeMovie={likeDislikeMovie} deleteMovie={deleteMovie} movie={movie} key={index} />
                             )
-                        }
                     })
                 }
             </div>
+            <Pagination
+                limitPage={limitPage}
+                currentPage={currentPage}
+                numberOfElement={numberOfElement}
+                previousPage={() => currentPage > 1 && setCurrentPage((currPage) => currPage-1)}
+                nextPage={() => currentPage < limitPage && setCurrentPage((currPage) => currPage+1)}
+            />
         </div>
     )
 }

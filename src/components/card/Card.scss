@@ -53,7 +53,16 @@
                     justify-content: center;
                     align-items: center;
                     width: 45%;
-                    padding: 5px 0;
+                    padding: 10px 0;
+                    border-radius: 4px;
+                    
+                    img {
+                        filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%);
+                    }
+
+                    &:hover {
+                        background-color: #ffffff21;
+                    }
                 }
                 .dislikes {
                     cursor: pointer;
@@ -61,12 +70,22 @@
                     justify-content: center;
                     align-items: center;
                     width: 45%;
+                    padding: 10px 0;
+                    border-radius: 4px;
 
                     img {
                         rotate: 180deg;
+                        filter: invert(75%) sepia(89%) saturate(6454%) hue-rotate(335deg) brightness(93%) contrast(102%);
+                    }
+                    &:hover {
+                        background-color: #ffffff21;
                     }
                 }
 
+                .activated {
+                    background-color: #ffffff21;
+                }
+                
                 img {
                     height: 25px;
                     margin-right: 8px;

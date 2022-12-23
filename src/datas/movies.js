@@ -59,6 +59,78 @@ const movies = [
       category: 'Thriller',
       likes: 22,
       dislikes: 12
+    }, {
+      id: '11',
+      title: 'Gone Girl',
+      category: 'Thriller',
+      likes: 22,
+      dislikes: 12
+    }, {
+      id: '12',
+      title: 'Gone Girl',
+      category: 'Thriller',
+      likes: 22,
+      dislikes: 12
+    }, {
+      id: '13',
+      title: 'Gone Girl',
+      category: 'Thriller',
+      likes: 22,
+      dislikes: 12
+    }, {
+      id: '14',
+      title: 'Gone Girl',
+      category: 'Thriller',
+      likes: 22,
+      dislikes: 12
+    }, {
+      id: '15',
+      title: 'Gone Girl',
+      category: 'Thriller',
+      likes: 22,
+      dislikes: 12
+    }, {
+      id: '16',
+      title: 'Gone Girl',
+      category: 'Thriller',
+      likes: 22,
+      dislikes: 12
+    }, {
+      id: '17',
+      title: 'Gone Girl',
+      category: 'Thriller',
+      likes: 22,
+      dislikes: 12
+    }, {
+      id: '18',
+      title: 'Gone Girl',
+      category: 'Thriller',
+      likes: 22,
+      dislikes: 12
+    }, {
+      id: '19',
+      title: 'Gone Girl',
+      category: 'Thriller',
+      likes: 22,
+      dislikes: 12
+    }, {
+      id: '20',
+      title: 'Gone Girl',
+      category: 'Thriller',
+      likes: 22,
+      dislikes: 12
+    }, {
+      id: '21',
+      title: 'Gone Girl',
+      category: 'Thriller',
+      likes: 22,
+      dislikes: 12
+    }, {
+      id: '22',
+      title: 'Gone Girl',
+      category: 'Thriller',
+      likes: 22,
+      dislikes: 12
     },
 ]
   

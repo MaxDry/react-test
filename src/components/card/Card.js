@@ -3,7 +3,7 @@ import Button from '../button/Button';
 import { rateLikes } from '../../utils/utils';
 import { memo } from "react";
 
-const Card = ({deleteMovie, movie, likeDislikeMovie, index}) => {
+const Card = ({deleteMovie, movie, likeDislikeMovie}) => {
 
     return (
         <div className="movie">
@@ -17,11 +17,11 @@ const Card = ({deleteMovie, movie, likeDislikeMovie, index}) => {
                 </div>
                 <div className="like-progress">
                     <div className="like-dislike">
-                        <div onClick={() => likeDislikeMovie(movie, 'like')} className="likes">
+                        <div onClick={() => likeDislikeMovie(movie, 'like')} className={`likes ${movie.myLike == true && "activated"}`}>
                             <img src="./assets/img/like.svg" />
                             <span>{movie.likes}</span>
                         </div>
-                        <div onClick={() => likeDislikeMovie(movie, 'dislike')} className="dislikes">
+                        <div onClick={() => likeDislikeMovie(movie, 'dislike')} className={`dislikes ${movie.myLike == false && "activated"}`}>
                             <img src="./assets/img/like.svg" />
                             <span>{movie.dislikes}</span>
                         </div>
@@ -29,7 +29,7 @@ const Card = ({deleteMovie, movie, likeDislikeMovie, index}) => {
                     <progress id="file" max="100" value={rateLikes(movie.likes, movie.dislikes)} />
                 </div>
                 <div className="delete-movie">
-                    <Button type="delete" onClick={() => deleteMovie(index)}>Supprimer</Button>
+                    <Button type="delete" onClick={() => deleteMovie(movie.id)}>Supprimer</Button>
                 </div>
             </div>
         </div>

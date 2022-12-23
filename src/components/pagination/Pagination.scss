@@ -1,0 +1,21 @@
+.pagination  {
+    margin: 60px 0;
+    .block-paginate {
+        cursor: pointer;
+        border: 1px solid white;
+        padding: 8px 15px;
+        font-size: 20px;
+        border-radius: 3px;
+        margin: 0 10px;
+
+        &:hover {
+            background-color: #ffffff3f;
+        }
+    }
+
+    .indicate-paginate {
+        margin: 0 10px;
+        font-size: 20px;
+        letter-spacing: 3px;
+    }
+}
