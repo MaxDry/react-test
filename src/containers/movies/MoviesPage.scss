@@ -1,0 +1,96 @@
+.wrapper {
+    margin: 0 150px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 100px;
+    grid-auto-rows: minmax(100px, auto);
+
+    .movie {
+        display: flex;
+        justify-content: center;
+        height: 550px;
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            height: 100%;
+            width: 100%;
+            border-radius: 25px;
+            overflow: hidden;
+
+            .image {
+                height: 60%;
+                border-radius: 25px;
+                overflow: hidden;
+                img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .description {
+                display: flex;
+                flex-direction: column;
+
+                .title {
+                    color: #388087;
+                    margin-top: 10px;
+                    font-size: 30px;
+                    font-weight: 700;
+                }
+
+                .category {
+                    color: #256166;
+                }
+            }
+
+            .like-progress {
+                margin: 20px 30px;
+
+                .like-dislike {
+                    display: flex;
+                    justify-content: space-between;
+                    padding-bottom: 5px;
+
+                    .likes {
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 45%;
+                        padding: 5px 0;
+                    }
+                    .dislikes {
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 45%;
+
+                        img {
+                            rotate: 180deg;
+                        }
+                    }
+
+                    img {
+                        height: 25px;
+                        margin-right: 8px;
+                    }
+                }
+
+                progress {
+                    width: 100%;
+                    height: 20px;
+                    accent-color: #388087;
+                }
+            }
+
+            .delete-movie {
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+}
